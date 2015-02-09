@@ -67,13 +67,17 @@ if (Meteor.isClient) {
 
   Template.symptom.events({
     'click .remove_symptom' : function (e, templ){
-      console.log(templ.data);
+      var currentSymptoms = Session.get('symptoms');
+      currentSymptoms.pop(templ.data._id);
+      Session.set('symptoms', currentSymptoms);
     }
   });  
 
   Template.context.events({
     'click .remove_context' : function (e, templ){
-      console.log(templ.data);
+      var currentContexts = Session.get('contexts');
+      currentContexts.pop(templ.data._id);
+      Session.set('contexts', currentContexts);
     }
   });
 
