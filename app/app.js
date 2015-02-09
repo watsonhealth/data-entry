@@ -43,7 +43,15 @@ if (Meteor.isClient) {
         'symptoms' : symptAndValues,
         'contexts' : currentContexts
       };
-      Sicknesses.insert(sickness);
+      Sicknesses.insert(sickness, function(error, id){
+        if (!error){
+          alert("Sickness inserted successfully with id" + id);
+        } else{
+          alert("something went wrong...retry !");
+        }
+      });
+
+
     }
   });
 
