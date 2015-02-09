@@ -161,6 +161,16 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.sickness.events({
+    'click .remove_sickness': function (e, templ) {
+      if(confirm("Supprimer cette maladie de la base de données ?") === true){
+        Sicknesses.remove({'_id':templ.data._id});
+      } else {
+        //do nothing
+      }
+    }
+  });
+
   Template.symptom_display_2.helpers({
     isImportant: function(){
       if (this.important === true){
