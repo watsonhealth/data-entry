@@ -46,6 +46,11 @@ if (Meteor.isClient) {
       Sicknesses.insert(sickness, function(error, id){
         if (!error){
           alert("Sickness inserted successfully with id" + id);
+          //reset
+          templ.$('#sick_name').val('');
+          templ.$('#sick_incidence').val('');
+          Session.set('symptoms', []);
+          Session.set('contexts', []);
         } else{
           alert("something went wrong...retry !");
         }
