@@ -90,6 +90,40 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.symptomSelector.events({
+    'click #create_context_submit' : function(e, templ){
+      var res = {
+        'name' : templ.$("#create_name").val(),
+      };
+
+      //Clear the object
+      templ.$("#create_name").val('');
+      templ.$("#create_position").val('');
+      templ.$("#create_photo_url").val('');
+
+      var currentSymptoms = Session.get("symptoms");
+      //Insert the result and add its id to the session
+      currentSymptoms.push(Symptoms.insert(res));
+      Session.set('symptoms', currentSymptoms);
+    }
+  });  
+
+  Template.contextSelector.events({
+    'click #create_context_submit' : function(e, templ){
+      var res = {
+        'name' : templ.$("#create_context_name").val()
+      };
+
+      //Clear the object
+      templ.$("#create_context_name").val('');
+
+      var currentContexts = Session.get("contexts");
+      //Insert the result and add its id to the session
+      currentContexts.push(Contexts.insert(res));
+      Session.set('contexts', currentContexts);
+    }
+  });
+
   Template.contextSelector.helpers({
     'all_contexts' : function(){
       var res = [];
