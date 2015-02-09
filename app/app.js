@@ -9,17 +9,14 @@ if (Meteor.isClient) {
   Meteor.startup(function (){
     console.log("Starting");
 
-    //To Debug and start with a good first symptom
-    Tracker.autorun(function () {
-      if(Symptoms.findOne()){
-        Session.set("symptoms", [Symptoms.findOne()._id]);
-      console.log("first symptom found");
-      }
-
-    //To start with contexts
+    // To Debug and start with a good first symptom
+    // Tracker.autorun(function () {
+    //   if(Symptoms.findOne()){
+    //     Session.set("symptoms", [Symptoms.findOne()._id]);
+    //   console.log("first symptom found");
+    //   }
+    // });
     Session.set('contexts',[]);
-    });
-
   });
 
   Template.sicknessEntryForm.events({
