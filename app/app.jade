@@ -1,0 +1,130 @@
+head
+  title Watson Data Entry
+
+body
+  h1(style="text-align:center") Watson Sickness Data Entry
+  +sicknessEntryForm
+  +symptomSelector
+  +contextSelector
+  +sicknessesDisplay
+
+template(name="sicknessEntryForm")
+  br
+  form.form-horizontal.small(role="form")
+    .container
+      .form-group
+        .col-sm-3
+          label.control-label Nom       
+        .col-sm-8
+          input#sick_name.form-control.input-sm(type="text", placeholder="Blenophragitus aiguisée")
+      .form-group
+        .col-sm-3
+          label.control-label Incidence (cas/an)       
+        .col-sm-8
+          input#word_path.form-control.input-sm(type="text", placeholder="3000")
+      .form-group
+        .col-sm-3
+          label.control-label Symptomes Selectionnés:
+      table.table.table-condensed
+        thead
+          tr
+            th Nom
+            th Position
+            th Important ?
+            th Photo url
+            th Remove
+        tbody
+          each symptoms
+            +symptom      
+      .form-group
+        .col-sm-3
+          label.control-label Contextes Selectionnés:
+      table.table.table-condensed
+        thead
+          tr
+            th Nom
+            th Remove
+        tbody
+          each contexts
+            +context
+      .form-group
+        .col-sm-2.center-block(style="float:none")
+          button#submit_call.btn.btn-default(type="submit") Ajouter maladie
+
+template(name = "symptom")
+  tr(id ="#{_id}").newsymptom
+    td #{name}
+    td #{place}
+    td
+      input(type="checkbox" name="important" value="True")
+    td #{photo_url}
+    td.remove_symptom 
+      a X
+
+template(name="context")
+  tr
+    td #{name}
+    td.remove_context 
+      a X
+
+template(name="symptomSelector")
+  .container.small
+    h6 Selectionner les symptomes a ajouter a la maladie ou creer un nouveau symptome
+    table.table.table-hover.table-condensed
+      thead
+        tr
+          th Nom
+          th Position
+          th Photo url
+          th Add
+      tbody
+        tr.create-symptom
+          th 
+            input.small#create_name.form-control.input-sm(type="text", placeholder="Blenophragitus aiguisée")
+          th
+            input#create_position.form-control.input-sm(type="text", placeholder="4")
+          th
+            input#create_photo_url.form-control.input-sm(type="text", placeholder="blenophragitus_aiguisee.jpg")
+          th#create_submit
+            a +
+        each all_symptoms
+          +symptom_display
+
+template(name="symptom_display")
+  tr
+    td #{name}
+    td #{place}
+    td #{photo_url}
+    td.add_symptom
+      a +
+
+template(name="contextSelector")
+  .container.small
+    h6 Selectionner les contextes a ajouter a la maladie ou creer un nouveau context
+    table.table.table-hover.table-condensed
+      thead
+        tr
+          th Nom du Contexte
+          th Add
+      tbody
+        tr.create-symptom
+          th 
+            input.small#create_context.form-control.input-sm(type="text", placeholder="Cas dans l'entourage")
+          th#create_context_submit 
+            a +
+        each all_contexts
+          +context_display
+
+template(name="context_display")
+  tr
+    td #{name}
+    td.add_context
+      a +
+
+template(name="sicknessesDisplay")
+  each sicknesses
+    +sickness
+
+template(name="sickness")
+
+
