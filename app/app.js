@@ -17,6 +17,7 @@ if (Meteor.isClient) {
     //   }
     // });
     Session.set('contexts',[]);
+    Session.set('symptoms',[]);
   });
 
   Template.sicknessEntryForm.events({
