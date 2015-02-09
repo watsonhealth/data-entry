@@ -126,5 +126,28 @@ template(name="sicknessesDisplay")
     +sickness
 
 template(name="sickness")
+  hr
+  .container
+    .row
+      .col-sm-7.bold #{name}
+      .col-sm-5 #{incidence} cas /an
+    h6 symptomes:
+    each symptoms
+      +symptom_display_2
+    h6 contextes:
+    each contexts
+      +context_display_2
+
+template(name="symptom_display_2")
+  .row.small.small(class="#{isImportant}")
+    with symptomInfo
+      .col-sm-4 #{name}
+      .col-sm-3 #{place}
+      .col-sm-5 #{photo_url}
+
+template(name = "context_display_2")
+  .row.small.small
+    with contextInfo
+      .col-sm-12 #{name}
 
 

@@ -154,6 +154,29 @@ if (Meteor.isClient) {
       return res;
     }
   });
+
+  Template.sicknessesDisplay.helpers({
+    sicknesses: function () {
+      return Sicknesses.find();
+    }
+  });
+
+  Template.symptom_display_2.helpers({
+    isImportant: function(){
+      if (this.important === true){
+        return 'isImportant';
+      }
+    },
+    symptomInfo: function() {
+      return Symptoms.findOne(this.symptom_id);
+    }
+  });
+
+  Template.context_display_2.helpers({
+    contextInfo: function() {
+      return Contexts.findOne(this.toString());
+    }
+  });
 }
 
 if (Meteor.isServer) {
