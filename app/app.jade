@@ -24,7 +24,7 @@ template(name="sicknessEntryForm")
           input#sick_incidence.form-control.input-sm(type="text", placeholder="3000")
       .form-group
         .col-sm-3
-          label.control-label Symptomes Selectionnés:
+          label.control-label Symptômes selectionnés:
       table.table.table-condensed
         thead
           tr
@@ -38,7 +38,7 @@ template(name="sicknessEntryForm")
             +symptom      
       .form-group
         .col-sm-3
-          label.control-label Contextes Selectionnés:
+          label.control-label Contextes sélectionnés:
       table.table.table-condensed
         thead
           tr
@@ -69,7 +69,7 @@ template(name="context")
 
 template(name="symptomSelector")
   .container.small
-    h6 Selectionner les symptomes a ajouter a la maladie ou creer un nouveau symptome
+    h6 Sélectionner les symptômes à ajouter à la maladie ou créer un nouveau symptôme
     table.table.table-hover.table-condensed
       thead
         tr
@@ -100,7 +100,7 @@ template(name="symptom_display")
 
 template(name="contextSelector")
   .container.small
-    h6 Selectionner les contextes a ajouter a la maladie ou creer un nouveau context
+    h6 Selectionner les contextes a ajouter a la maladie ou créer un nouveau contexte
     table.table.table-hover.table-condensed
       thead
         tr
@@ -122,6 +122,8 @@ template(name="context_display")
       a +
 
 template(name="sicknessesDisplay")
+  .container
+    h4(style="text-align:center") Maladies entrées
   each sicknesses
     +sickness
 
@@ -129,12 +131,14 @@ template(name="sickness")
   hr
   .container
     .row
-      .col-sm-7.bold #{name}
+      .col-sm-6.bold #{name}
       .col-sm-5 #{incidence} cas /an
-    h6 symptomes:
+      .col-sm-1.remove_sickness 
+        a Delete
+    h6 Symptômes:
     each symptoms
       +symptom_display_2
-    h6 contextes:
+    h6 Contextes:
     each contexts
       +context_display_2
 
