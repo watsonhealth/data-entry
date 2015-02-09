@@ -23,29 +23,38 @@ if (Meteor.isClient) {
   });
 
   Template.sicknessEntryForm.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
+    'click #submit_call': function (e, templ) {
+      e.preventDefault();
+      var symptAndValues = [];
+      var currentContexts = Session.get('contexts');
+
+      //Ugly Jquery to get it all
+      _.each(templ.$(".newsymptom"),function(tr_symptom){
+        symptAndValues.push({
+          'symptom_id': $(tr_symptom).attr('id'),
+          'important': $(tr_symptom).find('input').is(':checked')
+        });
+      });
+      console.log(symptAndValues);
+
+      var sickness = {
+        'name' : templ.$('#sick_name').val(),
+        'incidence' : templ.$('#sick_incidence').val(),
+        'symptoms' : symptAndValues,
+        'contexts' : currentContexts
+      };
+      Sicknesses.insert(sickness);
     }
   });
 
   Template.sicknessEntryForm.helpers({
     'symptoms' : function(){
-      var res = [];
       var currentSymptoms = Session.get("symptoms");
-      _.each(currentSymptoms, function (symptomId){
-        res.push(Symptoms.findOne(symptomId));
-      });
-      console.log(res);
-      return res;
+      return Symptoms.find({'_id':{$in:currentSymptoms}});
     },
     'contexts' : function(){
-      var res = [];
       var currentContexts = Session.get("contexts");
-      _.each(currentContexts, function(contextId){
-        res.push(Contexts.findOne(contextId));
-      });
-      return res;
+      return Contexts.find({'_id':{$in:currentContexts}});
     }
   });  
 
